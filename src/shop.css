@@ -1,0 +1,174 @@
+/* Elyscents luxury shop styles. Plain CSS equivalents of the requested
+   Tailwind classes: rounded-3xl = 24px, shadow-xl, scale-110. */
+
+.shop {
+  background: linear-gradient(180deg, #faf9f6 0%, #f2ede8 100%);
+  padding-bottom: 5rem;
+  min-height: 70vh;
+}
+.shop-inner { max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+.shop-center { text-align: center; }
+
+/* Headline */
+.shop-hero { text-align: center; padding: clamp(3rem, 8vw, 6.5rem) 0 clamp(1.25rem, 3vw, 2.25rem); }
+.shop-hero h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  letter-spacing: 0.06em;
+  text-indent: 0.06em;
+  line-height: 1.05;
+  color: #1c1b19;
+  margin: 0;
+}
+.shop-hero p { color: #6b655d; max-width: 46ch; margin: 1.1rem auto 0; font-size: 1.05rem; }
+
+/* Pill filters */
+.filters-lux { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; margin: 2rem 0 2.25rem; }
+.filter-row { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.filter-label { font-size: 0.85rem; color: #8a8379; min-width: 3rem; text-align: right; }
+.pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+.pill {
+  border: 1px solid #d9d2c8;
+  background: transparent;
+  color: #1c1b19;
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem;
+  font: 400 0.92rem var(--body);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.pill:hover { border-color: #1c1b19; }
+.pill.is-active { background: #111; border-color: #111; color: #fff; }
+.search-lux {
+  width: min(420px, 100%);
+  border: 0;
+  border-bottom: 1px solid #cfc8bd;
+  background: transparent;
+  border-radius: 0;
+  padding: 0.6rem 0.2rem;
+  margin-top: 0.4rem;
+  text-align: center;
+  font: inherit;
+}
+.search-lux:focus { outline: none; border-bottom-color: #111; }
+.result-bar { text-align: center; color: #8a8379; font-size: 0.9rem; margin: 0 0 1.75rem; }
+
+/* Scent family bands */
+.band { border-radius: 32px; padding: clamp(1.25rem, 4vw, 3rem); margin-bottom: 1.75rem; background: var(--band, #f4efe9); }
+.tone-gourmand { --band: #f3e4d9; }
+.tone-fresh { --band: #e5eeeb; }
+.tone-woody { --band: #e8e0d4; }
+.tone-floral { --band: #f1e3ea; }
+.tone-more { --band: #f4edd9; }
+.band-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-bottom: 1.75rem; }
+.band-head h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.03em;
+  margin: 0;
+  color: #1c1b19;
+}
+.band-blurb { margin: 0; color: #6b655d; }
+.band-count { margin-left: auto; font-size: 0.85rem; color: #8a8379; }
+
+/* Product grid */
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+
+/* Product card */
+.pcard {
+  --tint: #f1ede8;
+  background: #fff;
+  border-radius: 24px;
+  padding: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.45s ease, transform 0.45s ease;
+}
+.pcard:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+.pcard[data-family='Floral'] { --tint: #f6eaf0; }
+.pcard[data-family='Woody'] { --tint: #eee6db; }
+.pcard[data-family='Citrus'] { --tint: #f7f0d8; }
+.pcard[data-family='Amber'] { --tint: #f6e6d2; }
+.pcard[data-family='Fresh'] { --tint: #e8f0ee; }
+.pcard[data-family='Gourmand'] { --tint: #f6e8de; }
+
+.pcard-media { position: relative; aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; background: var(--tint); }
+.pcard-link { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.mix-blend-multiply { mix-blend-mode: multiply; }
+/* The bottle photos already include their own soft shadow and beige backdrop,
+   so they fill the card and no CSS drop-shadow is used (it would outline the square). */
+.pcard-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.pcard:hover .pcard-media img { transform: scale(1.1); }
+.pcard-media .bottle { width: 55%; height: auto; filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.15)); }
+
+.pcard-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2; pointer-events: none;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.78rem;
+  color: #3d3a35;
+}
+.pcard-add, .pcard-soldout {
+  position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 2;
+  border-radius: 999px; padding: 0.8rem 1rem; text-align: center; font: 500 0.95rem var(--body);
+}
+.pcard-add {
+  border: 0; cursor: pointer; background: #111; color: #fff;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease, background 0.2s ease;
+}
+.pcard-add:hover { background: #333; }
+.pcard:hover .pcard-add, .pcard:focus-within .pcard-add { opacity: 1; transform: none; }
+.pcard-soldout { background: rgba(255, 255, 255, 0.9); color: #6b655d; }
+
+@media (hover: none) {
+  .pcard-add { opacity: 1; transform: none; }
+}
+
+.pcard-body { padding: 1rem 0.6rem 0.7rem; }
+.pcard-body h3 { font-family: var(--display); font-weight: 500; font-size: 1.6rem; letter-spacing: 0.01em; margin: 0 0 0.25rem; }
+.pcard-body h3 a { color: #1c1b19; }
+.pcard-body h3 a:hover { text-decoration: none; }
+.pcard-notes { margin: 0 0 0.6rem; font-size: 0.88rem; color: #8a8379; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pcard-meta { margin: 0; display: flex; justify-content: space-between; gap: 0.75rem; font-size: 0.9rem; color: #6b655d; }
+.pcard-price { color: #1c1b19; font-weight: 500; }
+
+/* Images elsewhere (cart, product page): same transparent bottles */
+.app .product-image { background: #f2ede8; }
+.app .product-image img { object-fit: cover; }
+.app .product-image.large { aspect-ratio: 4 / 5; }
+.app .product-image .bottle { filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.15)); }
+.app .product-image.thumb .bottle { filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.15)); }
+
+/* Responsive */
+@media (max-width: 800px) {
+  .band { border-radius: 24px; }
+  .band-count { margin-left: 0; width: 100%; }
+}
+@media (max-width: 640px) {
+  .filter-label { width: 100%; text-align: center; min-width: 0; }
+  .pgrid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .pcard { border-radius: 20px; padding: 8px; }
+  .pcard-media { border-radius: 14px; }
+  .pcard-body h3 { font-size: 1.25rem; }
+  .pcard-meta { flex-direction: column; gap: 0.1rem; }
+  .pcard-add, .pcard-soldout { left: 8px; right: 8px; bottom: 8px; padding: 0.6rem 0.5rem; font-size: 0.82rem; }
+  .pcard-badge { top: 8px; left: 8px; font-size: 0.72rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pcard, .pcard-media img, .pcard-add, .pill { transition: none; }
+  .pcard:hover { transform: none; }
+  .pcard:hover .pcard-media img { transform: none; }
+}
